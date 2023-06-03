@@ -12,6 +12,8 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 <![endif]-->
 <!-- InstanceBeginEditable name="head" -->
 <!-- InstanceEndEditable -->
+
+echo "
 <script type="text/javascript">
   var imageURLs = [
        "images/Logo2.png"
@@ -32,3 +34,4 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     return img;
   }
 </script>
+"
