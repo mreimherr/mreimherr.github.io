@@ -157,6 +157,12 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size: 150%;
 }
+
+.SubSubTitleFont {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 125%;
+}
+
 .BodyFont {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size: 100%;
