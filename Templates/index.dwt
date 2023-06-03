@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>Matthew Reimherr - Assistant Professor - PSU</title>
+<!-- TemplateEndEditable -->
+<link href="../twoColLiqLtHdr.css" rel="stylesheet" type="text/css" /><!--[if lte IE 7]>
+<style>
+.content { margin-right: -1px; } /* this 1px negative margin can be placed on any of the columns in this layout with the same corrective effect. */
+ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it needs to correct extra whiltespace between the links */
+</style>
+<![endif]-->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<script type="text/javascript">
+  var imageURLs = [
+       "../~mlr36/images/Logo2.png"
+     , "../~mlr36/images/logo3.jpg"
+	 , "../~mlr36/images/logo4.jpg"
+	 , "../~mlr36/images/logo5.jpg"
+	 , "../~mlr36/images/logo6.jpg"
+	 , "../~mlr36/images/logo7.jpg"
+	 , "../~mlr36/images/logo8.jpg"
+	 , "../~mlr36/images/logo9.jpg"
+	 , "../~mlr36/images/logo10.jpg"
+  ];
+  function getImageTag() {
+    var img = '<img src=\"';
+    var randomIndex = Math.floor(Math.random() * imageURLs.length);
+    img += imageURLs[randomIndex];
+    img += '\" alt=\"Logo\" width=\"816\" height=\"254\" align=\"middle\" class=\"logo\"/>';
+    return img;
+  }
+</script>
+</head>
+
+<body>
+
+<div class="container">
+<div class="header"><!-- end .header -->
+  <a href="index.html">
+ 	<script type="text/javascript">
+  		document.write(getImageTag());
+	</script></a></div>
+  <div class="sidebar1">
+    <ul class="nav">
+      <li><a href="../index.html" class="SideBarFont">Home</a></li>
+      <li><a href="../research.html" class="SideBarFont">Research </a></li>
+      <li><a href="../book.html" class="SideBarFont">FDA Book</a></li>
+       <!-- <li><a href="../group.html" class="SideBarFont">Working Group</a></li> -->
+      <li><a href="../codes.html" class="SideBarFont">Code</a></li>
+      <li><a href="../teaching.html" class="SideBarFont">Teaching</a></li>
+      <li><a href="http://www.stat.psu.edu" class="SideBarFont">PSU Statistics</a></li>
+      <li>
+    <div align="left" class="SideBarFont"></div>
+  </li>
+  </ul>
+      <p class="AddressFont">Matthew Reimherr<br />
+        Department of Statistics<br />
+      Penn State University<br />
+      411 Thomas Building<br />
+      University Park, PA 16802<br />
+      mreimherr@psu.edu<br />
+      (814) 865-2544      <br />
+    <a href="http://www.psu.edu"><img src="../images/PS_HOR_RGB_2C.png" alt="PSULogo" width="140" height="60" hspace="0" /></a></p>
+
+  <!-- end .sidebar1 --></div>
+  <div class="content"><!-- TemplateBeginEditable name="Body" -->
+    <h2 class="SubTitleFont">Matthew Reimherr - Assistant Professor</h2>
+    <p class="BodyFont">I am an Assistant Professor in the Department of Statistics at Penn State University. Prior to coming here I was a PhD student at the University of Chicago.</p>
+    <h2 class="SubTitleFont">Research Interests</h2>
+    <p class="BodyFont">My work is primarily concerned with the theoretical development and application of methods for functional data.   Applied FDA areas I am particularly interested in are the high frequency settings encountered in financial econometrics, and the sparse longitudinal settings encountered in genetic association studies. <br />
+    </p>
+    <p><span class="BodyFont">Some of my other research interests include time series analysis, change point analysis, statistical genetics, quantifying prior impact on Bayesian analyses, and the intersection of de</span><span class="BodyFont">pendence and information theory. </span>
+      <!-- end .content -->    </p>
+    <!-- TemplateEndEditable --></div>
+  <div class="footer">
+    <p class="AddressFont">Landscape photos taken by Fred Reimherr.</p>
+    <!-- end .footer --></div>
+<!-- end .container --></div>
+</body>
+</html>

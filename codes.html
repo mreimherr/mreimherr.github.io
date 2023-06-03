@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/index.dwt" codeOutsideHTMLIsLocked="false" -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Code - Reimherr - PSU</title>
+<!-- InstanceEndEditable -->
+<link href="twoColLiqLtHdr.css" rel="stylesheet" type="text/css" /><!--[if lte IE 7]>
+<style>
+.content { margin-right: -1px; } /* this 1px negative margin can be placed on any of the columns in this layout with the same corrective effect. */
+ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it needs to correct extra whiltespace between the links */
+</style>
+<![endif]-->
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+<script type="text/javascript">
+  var imageURLs = [
+       "../~mlr36/images/Logo2.png"
+     , "../~mlr36/images/logo3.jpg"
+	 , "../~mlr36/images/logo4.jpg"
+	 , "../~mlr36/images/logo5.jpg"
+	 , "../~mlr36/images/logo6.jpg"
+	 , "../~mlr36/images/logo7.jpg"
+	 , "../~mlr36/images/logo8.jpg"
+	 , "../~mlr36/images/logo9.jpg"
+	 , "../~mlr36/images/logo10.jpg"
+  ];
+  function getImageTag() {
+    var img = '<img src=\"';
+    var randomIndex = Math.floor(Math.random() * imageURLs.length);
+    img += imageURLs[randomIndex];
+    img += '\" alt=\"Logo\" width=\"816\" height=\"254\" align=\"middle\" class=\"logo\"/>';
+    return img;
+  }
+</script>
+</head>
+
+<body>
+
+<div class="container">
+<div class="header"><!-- end .header -->
+  <a href="index.html">
+ 	<script type="text/javascript">
+  		document.write(getImageTag());
+	</script></a></div>
+  <div class="sidebar1">
+    <ul class="nav">
+      <li><a href="index.html" class="SideBarFont">Home</a></li>
+      <li><a href="research.html" class="SideBarFont">Research </a></li>
+      <li><a href="book.html" class="SideBarFont">FDA Book</a></li>
+      <li><a href="group.html" class="SideBarFont">Working Group</a></li>
+      <li><a href="codes.html" class="SideBarFont">Code</a></li>
+      <li><a href="teaching.html" class="SideBarFont">Teaching</a></li>
+            <li><a href="Documents/CV_Reimherr.pdf" class="SideBarFont">Curriculum Vitae</a></li>
+      <li><a href="http://www.stat.psu.edu" class="SideBarFont">PSU Statistics</a></li>
+      <li>
+    <div align="left" class="SideBarFont"></div>
+  </li>
+  </ul>
+      <p class="AddressFont">Matthew Reimherr<br />
+        Department of Statistics<br />
+      Penn State University<br />
+      411 Thomas Building<br />
+      University Park, PA 16802<br />
+      mreimherr@psu.edu<br />
+      (814) 865-2544      <br />
+    <a href="http://www.psu.edu"><img src="images/PS_HOR_RGB_2C.png" alt="PSULogo" width="140" height="60" hspace="0" /></a></p>
+   
+  <!-- end .sidebar1 --></div>
+  <div class="content"><!-- InstanceBeginEditable name="Body" -->
+    <p class="SubTitleFont">Computer Codes</p>
+    <p class="BodyFont">
+    This section is a work in progress and more functions will be added as they are prepared. However, if you would like code for any paper listed under the research section, but don't see it here, then just send me an email and I will send you what we have. All of our methods are coded in R or Matlab (sometimes with a little C++).
+    </p>
+    <ul>
+       <li><a href="Documents/OfficialCode_v03_final_JRSSB.zip">Simulation Code</a> for Reimherr, Meng, and Nicolae (2021).</li>
+    	<li><a href ="https://github.com/lidom/ffscb"> ffscb</a>: We have an R package (authored by Dominik Liebl) availabe for constructing fast and fair simultaneous confidence bands as well as the bands included in the FRegion package (by Hyunphil Choi).  The package is available from github and the corresponding paper can be found <a href="https://arxiv.org/abs/1910.00131">here.</a> </li>
+        <li><a href="Documents/FonS_Example.zip">AFSL and FLAME</a>:  Here is an example for FLAME (in R) and AFSL (in Matlab). These scripts can be used for variable selection in high-dimensional function-on-scalar regression, and scale quite well with the number of predictors and sample size. Note that the data for this example is simulated and discussed in more detail <a href="http://jeffgoldsmith.com/IWAFDA/shortcourse_data.html"> here</a>.</li>
+        <li><a href="Documents/FMINQUE/FMINQUE.m">FMINQUE</a>:  This MATLAB function can be used to estimate the variance components in scalar, vector, and functional linear models.  In otherwords, one can fit linear mixed effects models using this function.  Example codes: <a href="Documents/FMINQUE/scalar_example.m">scalar</a>, <a href="Documents/FMINQUE/vector_example.m">vector</a>, <a href="Documents/FMINQUE/functional_example.m"> functional</a>  </li>
+      <li><a href ="https://github.com/hpchoi/fregion"> FRegion</a>: We have an R package (authored by Hyunphil Choi) availabe for constructing confidence bands and carrying out hypothesis testing for functional parameter estimates. It is based on the work of Choi and Reimherr (2016), and is available through GitHub.</li>
+      <li>R Binary for scpt package.  This creates a function <em>spatial_change_test </em> which carries out the spatio-temporal change-point tests described in Gromenko, Kokoszka, and Reimherr (2015).  <a href="Documents/scpt_0.1.tar.gz">SOURCE</a> and  <a href="Documents/scpt_sim_example.R">EXAMPLE</a>.</li>
+      <li>A <a href="Documents/Order_FAR_Example_and_Code/Sim_Ex.R">simulation example</a> and <a href="Documents/Order_FAR_Example_and_Code/Order_FAR.R">R Code</a> for  Kokoszka and Reimherr (2013). This function tests for the order of a Functional Autoregressive Model. </li>
+      <li>A <a href="Documents/tsSimulations.pdf">simulation study</a> and <a href="Documents/tsRCode.txt">R Code</a> for Horvath, Kokoszka, and Reimherr (2009). This carries out a two sample test for functional linear models.</li>
+    </ul>
+<p>&nbsp;</p>
+    <!-- InstanceEndEditable --></div>
+  <div class="footer">
+    <p class="AddressFont">Landscape photos taken by Fred Reimherr.</p>
+    <!-- end .footer --></div>
+<!-- end .container --></div>
+</body>
+<!-- InstanceEnd --></html>

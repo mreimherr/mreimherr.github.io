@@ -1,0 +1,130 @@
+#--------------Introduction--------------#
+#Here we provide a sample of R code used to carry out the testing procedure
+#described in Two sample inference in functional linear models, by Horvath, Kokoszka, and Reimherr.
+#The first section of code concerns simulating from a functional linear model with 
+#functional response and explanatory functions.  This is the code for the most general 
+#procedure which does not assume equal variances of the explanatory functions.  
+#"Application of FDA" and onwards consists of applying our procedure to the data.
+
+library(fda) # We will be using the fda package
+basisnumber=80
+databasis<-create.bspline.basis(c(0,1),basisnumber) # Throughout, we will be using the splines basis
+
+#--------------Functions for Simulating Data--------------#
+#The two function below are used to simulate random functions#
+#We sample the functions at M points#
+#Function generates a standard brownian motion on the [0,T] interval#
+BM.fn <- function(M,T){  
+dt<-T/(M-1) #To ensure we start at zero and end at 1
+W<-numeric(M)
+W[1]=0
+for(j in 2:M){ W[j]=W[j-1]+sqrt(dt)*rnorm(1, mean=0, sd=1) }
+return(W) }
+
+#Function generates a standard brownian bridge on the [0,T] interval#
+BB.fn<-function(M,T){
+dt<-T/(M-1) #To ensure we start at zero and end at 1
+W<-numeric(M)
+W[1]=0
+for(j in 2:M){ W[j]=W[j-1]+sqrt(dt)*rnorm(1, mean=0, sd=1) }
+B= W*(W[M]-W)
+return(B) }
+
+#--------------Parameter Values--------------#
+M=200 # Number of points to sample from each function
+T=1 # End point of interval for functions
+N= 100 # Sample Size for both samples
+t<-numeric(M) # time points where we observe functions
+t=(0:(M-1))/(M-1)
+xnharm=5	# number of  principle components for explanatory
+ynharm=3 # number of  principle components for response
+reps=100
+
+#--------------Generating Data from Functional Linear Model--------------#
+Kernal<-function(s,t,c){ c*min(s,t)} #This is the kernel of the operator used in the functional linear model#
+c1=1  #value of c for the first sample
+c2=5 #value of c for the second sample
+# Since we are working with vectors that represent the observed functions 
+# we have to construct the matrix approximation of the operator
+KernalMatrix1<-matrix(rep(0,M*M), M, M) #For first sample
+for(i in 1:M){ for(j in 1:M){
+KernalMatrix1[i,j]=Kernal(t[i],t[j],c1) } }
+
+KernalMatrix2<-matrix(rep(0,M*M), M, M) #For second samplen 
+for(i in 1:M){for(j in 1:M){
+KernalMatrix2[i,j]=Kernal(t[i],t[j],c2) } }
+
+#We store the functions in matrices, different rows represent different observations, 
+#while different columns represent different time points
+X1<- matrix(0,  N, M) #Generate N i.i.d. Brownian Motions for Explanatory Functions of first sample
+for( i in 1: N){ X1[i,]= BM.fn(M,T) } 
+
+X2<- matrix(0,  N, M) # Generate N i.i.d. Brownian Bridges  for Explanatory Functions of second sample
+for( i in 1:N){ X2[i,]= BB.fn(M,T) } 
+
+Y1<- matrix(0,  N , M) #Generate Response for first sample 
+for( i in 1: N){ Y1[i,]= (1/M)*X1[i,]%*%KernalMatrix1   +  BM.fn(M,T) } 
+
+Y2<- matrix(0,  N , M) #Generate Response for second sample
+for( i in 1: N){ Y2[i,]= (1/M)*X2[i,]%*%KernalMatrix2   +  BM.fn(M,T) } 
+
+X<-rbind(X1,X2) #Pooled Explanatory functions
+Y<-rbind(Y1,Y2) #Pooled response functions
+
+Test<-numeric(0)
+Lambda<-numeric(0)
+TBasis<-numeric(0)
+
+#--------------Application of FDA--------------#
+#We start by expressing our data as functional data#
+#The observations are expressed as function with respect to the splines basis
+#For our procedure we will use the pooled versions
+X.f<-center.fd(data2fd(t(X),t,databasis))
+Y.f<-center.fd(data2fd(t(Y),t,databasis))
+
+#A pca is then performed on the pooled samples#
+pca_X=pca.fd(X.f,xnharm)
+pca_Y=pca.fd(Y.f,ynharm)
+
+#After the pca we can separate the samples
+X1scores=pca_X$scores[1:N,]
+X2scores=pca_X$scores[(N+1):(2*N),]
+Y1scores=pca_Y$scores[1:N,]
+Y2scores=pca_Y$scores[(N+1):(2*N),]
+
+TBasis=inprod(pca_X1$harmonics,pca_X2$harmonics)
+
+
+#--------------Testing Procedure--------------#
+# We first estimate the contribution to the covariance from the explanatory functions#
+gamma1<-(t(X1scores)%*%X1scores)*(1/N)
+gamma2<-(t(X2scores)%*%X2scores)*(1/N)
+gammainv1<-solve(gamma1)
+gammainv2<-solve(gamma2)
+
+# Then we fit a linear regression between the two samples
+LM1<-lm(Y1scores ~ X2scores - 1)
+LM2<-lm(Y2scores ~ X2scores - 1)
+
+# We pull the coefficient estimates
+mu<-matrix(LM1$coeff,ncol=1)
+mustar<-matrix(LM2$coeff,ncol=1)
+
+# We estimate the covariance matrix of the errors
+errorcov1 <- (1/(N-xnharm)) * (t(LM1$residuals)%*%LM1$residuals)
+errorcov2 <- (1/(N-xnharm)) * (t(LM2$residuals)%*%LM2$residuals)
+
+# For simplicity, we construct the test statistic in two stages:
+# First we compute the estimated covariance matrix used in the quadratic form
+sigma=errorcov1 %x% gammainv1 + (errorcov2 %x% gammainv2 ) 
+# And finally we compute the test statistic
+Lambda=N*t(mu - mustar)%*%solve(sigma)%*%(mu -mustar)
+
+#If the null is true, c1=c2 in this case, then Lambda should 
+#have an approximate chi-squared distribution with xnharm*ynharm degrees
+#of freedom
+
+P.Value<-1-pchisq(Lambda,df=xnharm*ynharm)
+P.Value
+
+
