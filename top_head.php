@@ -36,4 +36,4 @@ echo "
     return img;
   }
 </script>
-"
+";
